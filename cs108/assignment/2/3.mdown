@@ -1,0 +1,43 @@
+##GameCharacterTester.java
+
+```Java
+public class GameCharacterTester {
+
+	public static void main(String[] args) {
+		
+		//Creating the space cowboy
+		GameCharacter spaceCowboy = new GameCharacter();
+		
+		//Let's try changing stuff
+		spaceCowboy.modifyCharacteristic(-10, "Health"); //ouch
+		spaceCowboy.modifyCharacteristic(-5, "haPPiNess");
+		spaceCowboy.modifyCharacteristic(50, "weight");
+		
+		//Get function
+		System.out.println("Health: " + spaceCowboy.getHealth());
+		System.out.println("Weight: " + spaceCowboy.getHappiness());
+		System.out.println("Happiness: " + spaceCowboy.getWeight());
+		
+		//Test exception by shooting lazers at spaceCowboy
+		try {
+			spaceCowboy.modifyCharacteristic(-10, "healTH");
+			spaceCowboy.modifyCharacteristic(-40, "healTh");
+			spaceCowboy.modifyCharacteristic(-300, "health");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			System.out.println(spaceCowboy.getHealth());
+		}
+		
+	} //End main()
+} //End class GameCharacterTester
+```
+
+##Output
+```
+Health: 90
+Weight: 70
+Happiness: 100
+Exceeds bounds.
+40
+```

@@ -1,0 +1,10 @@
+public class tester{
+  public static void main(String[] args){
+    int i;
+    System.out.println("Test");
+    Integer[] test = new Integer[100];
+    for(i=0; i<100; i++) test[i] = 100-i;
+    ThreadedSorter.sort(test, 0, 99);
+    for(Integer d: test) System.out.println(d);
+  }
+}

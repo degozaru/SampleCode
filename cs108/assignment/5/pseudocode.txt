@@ -1,0 +1,14 @@
+public boolean add(E itemToAdd)
+  Check to see if queue array is full
+    if it is:
+      create new array with bigger size
+      populate array with our existing array
+      point the variable towards the existing array (make sure to set the Head variable and tail variable
+      call a garbage collection
+  Add the item to the end and adjust the tail
+
+public E remove()
+  Set a temp variable to the head element
+  nullify the element at the head
+  adjust the head
+

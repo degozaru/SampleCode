@@ -1,0 +1,50 @@
+#Scope
+
+##What is Scope
+
+**Scope** describes the fact that **variables only exist in the block in which they are declared**. For example:
+
+```Java
+//<---- blank line ---->
+for (int i = 0; i < array.length; i++) {
+  if (array[i] == 5) 
+    break;
+}
+System.out.println(i);
+```
+
+The above code will give an error, because **the variable i only exists in the for loop and is invisible for everyone else**. The right way to do this would be like:
+
+```Java
+int i;
+for (i = 0; i < array.length; i++) {
+  if (array[i] == 5)
+    break;
+}
+System.out.println(i);
+```
+
+This would successfully print `i` because **the variable was initialized inside the block which `println()` is used (It was declared in line one in our second example, as opposed to line two in our first example, where it was declared *inside* the for loop.
+
+##Variables with Same Names
+
+Because of scope, we can have **two variables with the same name** in one program:
+
+```Java
+public class Cat {
+  
+  private int numLegs;
+  
+  public void setNumLegs(int numLegs) {
+    this.numLegs = numLegs;
+  } //End setNumLegs()
+
+} //End Cat()
+```
+
+In this example, we have two variables `numLegs`:
+
+1. numLegs variable **in the Cat()** class, the instance variable. This variable was declared on line 3
+1. numLegs variable **in the setNumLegs()** method, which exists in that method only. This variable was declared on line 5.
+
+The instance variable in number one only exists in the `Cat()` class. The method variable in number two only exists in `setNumLegs()`. They are two different variables. However, we can use the `Cat()` instance variables in any methods by using `this.variable` as done in line 6.

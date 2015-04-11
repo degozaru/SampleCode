@@ -1,0 +1,7 @@
+public class GameCharacterTester2 {
+
+	public static void main(String[] args) {
+		//Step 1: Create instances
+		
+	} //End main()
+} //End class GameCharacterTester

@@ -1,0 +1,41 @@
+> Loud music. High tech. Low life. That's how I liked it. That's how I rolled: Wired to the network, decking away the night in the midst of music tunneled through an elaborate music implant... With the safety volume controls **overrided**, of course.
+
+> It was an art, this implant. A black market model that **subsituted** traditional music implants, **overloading and overriding** many of it's functions, it would be a crime to even consider it as a **subclass** of Goggle's patents.
+
+> Outside, I was a madman, dancing with my deck in dead silence. I was on a high, celebrating with my electronic partners on another success.
+
+> The school network was way too simple. Some deck monkey forgot to take another look at his **setter and getters**. Didn't even throw an **exception** when I tried to access the student database. Their fault, I guess. I picked myself a cute girl, and set her as my new roommate... In a girls dorm, of course.
+
+> That's where the story begins. Where I came to be where I am now. My music died, right at the favorite part. It was replaced with the ominous ring of my comms device. Strange, being I don't have friends, and I haven't taken any jobs in the last year. I walked slowly to my comms device. The location, name, and holo of the caller was blocked.
+
+> "Hello?"
+
+> "Case. I'd love to know how I got a boy roommate in a girl's dorm."
+
+> In rectrospect, I should have done a background check against her.
+
+> "I'll be asking the questions, Molly. I'd like to know how you got this number."
+
+> "What a great first impression. I got in the same way as you, the servers didn't **encapsulate** their student data. Pulled yours straight from their **heap**."
+
+> "You must be a decker too, then. How about we jam together sometimes, run some neat pranks on the school."
+
+> "I have a better idea, we run Goggle down. While we're at it, we take Pineapple corporations and Spacebook."
+
+> "Whoa, why the hate, sister?"
+
+> "None of your buzz, deckboy. You're mines. I've already got logs of your intrusion and I'll have you locked for cybercrime if you don't run with me"
+
+> She was right, cybercrime was worse than murder these days. Corporations didn't want you getting too smart. I was cornered into helping her. I'll play along with her and get her when she slips. She'll pay.
+
+> "What do you want from me?"
+
+> "We'll start small. I'll send you **pseudo** for a **generic** I need."
+
+> After that, my comms went dark. The music resumed and the volume nearly blew my ear.
+
+> The job took me quite a while. Spent a whole day **debugging** the program. In the end, it was just a **scoping** and **instance variable** error I had made. Just then, the sounds of sirens.
+
+> The whole chase was a blur. Apparently, Molly had pulled a run under my credentials. I managed to escape with my deck. My home rig was probably being subjected to a RAM dump. Good thing I made it a point to always travel light.
+
+

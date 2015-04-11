@@ -1,0 +1,16 @@
+public class GameCharacterTester2 {
+
+	public static void main(String[] args) {
+		//====Step 1: Create instances====
+		System.out.println("Creating new characters");
+		DogCharacter dixie = new DogCharacter();
+		CatCharacter nyan = new CatCharacter();
+		AlienCharacter et = new AlienCharacter();
+		DogCharacter dixie2 = new DogCharacter(50, 50, 50);
+		//Error, bound too low
+		System.out.println("Creating an already-dead alien");
+		AlienCharacter et2 = new AlienCharacter(-1, 50, 50);
+		System.out.println(et2.getHealth());
+		
+	} //End main()
+} //End class GameCharacterTester

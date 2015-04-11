@@ -1,0 +1,24 @@
+          =====Test1====
+           8 6 4 2 1 3 9 
+[+] First remove from FRONT: 8
+[+] Second remove from FRONT: 6
+[+] Third remove from BACK: 9
+
+          =====Test2====
+        100 2 51 191 1337 
+[+] First remove from FRONT: 100
+[+] Second remove from BACK: 1337
+[+] Third remove from BACK: 191
+
+          =====Test3====
+           30 20 49 93 
+[+] First remove from FRONT: 30
+[+] Second remove from FRONT: 20
+[+] Third remove from FRONT: 49
+
+          =====Test4====
+           80 9 343 23 
+[+] First remove from BACK: 23
+[+] Second remove from BACK: 343
+[+] Third remove from BACK: 9
+

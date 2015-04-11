@@ -1,0 +1,28 @@
+**PRINT ALL ACTIONS AND COMPARE WITH EXPECTED VALUES**
+
+Step 1) Test constructors
+
+	make new dog, cat, and alien using default constructors
+	make new dog using constructor with health 60 happiness 75 weight 90
+	make new cat using constructor with health 110, happiness 50, weight 50 (This should call a default constructor)
+	make new alien using constructor with health -10, happiness 50, weight 50 (This should call a default constructor)
+
+Step 2) Checking these values.
+
+	print the value of all the constructed instanced classes
+
+Step 3) Changing values
+
+	modify hapiness of dog by -50
+	print happiness
+	modify sadness by 50 (should throw)
+	modify modify health by 100 (should throw)
+	modify health by -100 (should throw)
+
+Step 4) test sad noise
+
+	call sad noise for all types of subclasses
+
+Step 5) test happy noise
+	
+	Call the happy method for everyone

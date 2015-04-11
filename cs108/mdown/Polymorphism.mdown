@@ -1,0 +1,40 @@
+#Polymorphism
+
+##What is Polymorphism
+
+**Polymorph** in world of warcraft means to **change a monster to a sheep**... In CS, polymorphism is a **call that changes depending on the object's properties**. **Thats it.**
+
+##Example
+
+Uh...
+
+```Java
+public class Human() {
+
+	String name;
+	
+	public Human(String name) {
+		this.name = name
+	} //End Constructor
+
+	public void whatIsMyName() {
+		System.out.println("I'm " + name);
+	} //End whatIsMyName()
+
+} //End Human()
+```
+
+```Java
+Human jon = new Human("Jon");
+Human kaitlyn = new Human("Kaitlyn");
+
+jon.whatIsMyName();
+kaitlyn.whatIsMyName();
+```
+
+Outputs:
+
+```
+I'm Jon
+I'm Kaitlyn
+```

@@ -1,0 +1,3 @@
+Check to see if there is only one instance OR no instance of the specified variable.
+  return false and exit if either is true.
+Run removeAll(), which will remove all instances of a specified value.

@@ -1,0 +1,250 @@
+#Assignment 4
+
+##Overview
+
+Using Generics to create a `Backpack` class that will accept a generic type `<E>` and work with those types.
+
+####To-do
+
+1. Create pseudocode for `allIndiciesOf()` and `removeMultipleInstancesOf()`.
+1. Modify the `Backpack` class to implement `BackpackInterface`.
+1. Write a `BackpackTester` class to test all methods in `Backpack`.
+
+##Pseudocode
+
+###allIndiciesOf()
+
+Although the execution seemed easy on pseudocode, it turned out to be a lot harder than what I have written down, due to primitive lists requiring an arraysize on their initialization. My code is a bit different than what was outline in my pseudocode because of this.
+
+```
+Initialize a temporary list.
+Check every spot in container and compare it with the item sought.
+  if it matches, append that to the temporary list
+Return the list once finished.
+```
+
+###removeMultipleInstancesOf()
+
+```
+Check to see if there is only one instance OR no instance of the specified variable.
+  return false and exit if either is true.
+Run removeAll(), which will remove all instances of a specified value. return true afterwards.
+```
+
+##Backpack.java
+
+```Java
+import java.util.ArrayList;
+
+public class Backpack<E> implements BackpackInterface<E> {
+	
+	protected ArrayList<E>container;
+	
+	/* Table of contents for Backpack():
+	 * Constructor					        Ln. 19
+	 * add()						            Ln. 24
+	 * removeOne()					        Ln. 29
+	 * printContents()				      Ln. 36
+	 * contains()					          Ln. 43
+	 * isEmpty()					          Ln. 48
+	 * removeAll()					        Ln. 53
+	 * allIndiciesOf()				      Ln. 65
+	 * removeMultipleInstancesOf()	Ln. 86
+	 */
+	
+	//This is the constructor for backpack
+	public Backpack(){
+		container = new ArrayList<E>();
+	} //End constructor
+	
+	//Adds element to backpack
+	public void add(E toAdd){
+		container.add(toAdd);
+	} //End add()
+	
+	/*Removes first instance of specified item
+	 *  returns true if successful.
+	 */
+	public boolean removeOne(E toRemove){
+		return container.remove(toRemove);
+	} //End removeOne()
+	
+	//Prints out all the contents of the backpack
+	public void printContents(){
+		for (E anObject : container)
+		    System.out.print( anObject+" ");
+		System.out.println("");
+	} //End printContents()
+	
+	//Returns true if backpack has the specified element.
+	public boolean contains(E itemSought) {
+		return container.contains(itemSought);
+	} //End contains()
+	
+	//Returns true if backpack is empty.
+	public boolean isEmpty() {
+		return container.isEmpty();
+	} //Ends isEmpty()
+	
+	/*Removes all matching elements in backpack
+	 * returns true if successful
+	 */
+	public boolean removeAll(E itemSought) {
+		if (container.contains(itemSought)){
+			while(container.remove(itemSought)) {}
+			return true;
+		} else {
+			return false;
+		}
+	} //End removeAll()
+	
+	//Returns an array with addresses to the elements
+	public int[] allIndicesOf(E itemSought) {
+		int i;
+		int[] returnList;
+		ArrayList<Integer> tempList = new ArrayList<Integer>();
+		
+    //This will append all the indicies of the array into ArrayList
+		for (i = 0; i < container.size(); i++) {
+			if (itemSought == container.get(i))
+					tempList.add(i);
+		}		
+		
+    //This is the transfer from ArrayList to the return array
+		returnList = new int[tempList.size()];
+		for (i = 0; i < tempList.size(); i++) {
+			returnList[i] = tempList.get(i);
+		}
+		
+		return returnList;
+	} //End allIndiciesOf()
+
+	/* Will remove all instances of the specified element
+	 * UNLESS the element appears once.
+	 * returns True if at least one item was removed.
+	 */
+	public boolean removeMultipleInstancesOf(E toRemove) {
+		if (container.indexOf(toRemove) == container.lastIndexOf(toRemove))
+			return false;
+		else
+			return removeAll(toRemove);
+	} //End removeMultipleInstancesOf()
+		
+} //End Backpack()
+```
+
+##BackpackTester.java
+
+###Code
+
+```Java
+import java.util.Arrays;
+
+
+public class BackpackTester {
+
+  public static void main(String[] args) {
+    /* Step 1:
+     * Constructing backpacks of different types
+     */
+    System.out.println("Constructing bags (String and Integer)");
+    Backpack<String> wordBag = new Backpack<String>();
+    Backpack<Integer> numBag = new Backpack<Integer>();
+    System.out.println("============");
+    
+    /* Step 2:
+     * Add Strings to stringBag and nums to numBag
+     * try adding strings to numBag
+     */
+    System.out.println("Adding contents to bag");
+    wordBag.add("Space");
+    wordBag.add("Pirate");
+    wordBag.add("Space");
+    wordBag.add("Cowboy");
+    numBag.add(1);
+    numBag.add(1);
+    numBag.add(2);
+    numBag.add(2);
+    numBag.add(2);
+    numBag.add(2);
+    numBag.add(2);
+    numBag.add(3);
+    //numBag.add("String"); yields a compile error
+    System.out.println("============");
+    
+    /* Step 3:
+     * Print contents
+     */
+    System.out.println("Printing contents of bags...");
+    wordBag.printContents();
+    numBag.printContents();
+    System.out.println("============");
+    
+    /* Step 4:
+     * Checking to see if a specified string is in the list
+     */
+    System.out.println("Searching for 'Space', then 'Landlovers'...");
+    System.out.println(wordBag.contains("Space"));
+    System.out.println(wordBag.contains("Landlovers"));
+    System.out.println("Searching for 1 then 4...");
+    System.out.println(numBag.contains(1));
+    System.out.println(numBag.contains(4));
+    System.out.println("Seeing if wordBag is empty...");
+    System.out.println(wordBag.isEmpty());
+    System.out.println("Returning indicies of 2 in numBag");
+    System.out.println(Arrays.toString(numBag.allIndicesOf(2)));
+    System.out.println("============");
+    
+    /* Step 5: 
+     * Remove functions
+     */
+    System.out.println("Removing ONE 2 from numBag...");
+    numBag.removeOne(2);
+    numBag.printContents();
+    System.out.println("Removing ALL 2's from numBag");
+    numBag.removeAll(2);
+    numBag.printContents();
+    System.out.println("Removing multiple occurances of 1's");
+    numBag.removeMultipleInstancesOf(1);
+    numBag.printContents();
+    System.out.println("Trying to remove 'multiple 3s'");
+    numBag.removeMultipleInstancesOf(3);
+    numBag.printContents();
+    System.out.println("============");
+  } //End main()
+
+} //End BackpackTester()
+```
+
+###Output
+
+```
+Constructing bags (String and Integer)
+============
+Adding contents to bag
+============
+Printing contents of bags...
+Space Pirate Space Cowboy 
+1 1 2 2 2 2 2 3 
+============
+Searching for 'Space', then 'Landlovers'...
+true
+false
+Searching for 1 then 4...
+true
+false
+Seeing if wordBag is empty...
+false
+Returning indicies of 2 in numBag
+[2, 3, 4, 5, 6]
+============
+Removing ONE 2 from numBag...
+1 1 2 2 2 2 3 
+Removing ALL 2's from numBag
+1 1 3 
+Removing multiple occurances of 1's
+3 
+Trying to remove "multiple 3s"
+3 
+============
+```

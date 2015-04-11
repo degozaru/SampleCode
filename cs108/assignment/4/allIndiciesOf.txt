@@ -1,0 +1,5 @@
+nitialize a temporary list.
+Check every spot in container and compare it with the item sought.
+  if it matches, append that to the temporary list.
+Return the list once finished.
+

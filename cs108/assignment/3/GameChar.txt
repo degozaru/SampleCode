@@ -1,0 +1,60 @@
+Abstract Class GameCharacter
+
+---Initialization variables for game character---
+
+	---Private---
+	health = default 100
+	happiness = default 100
+	weight = default 100
+
+	---Public---
+	none
+
+---Constructors---
+
+	1. Default values
+	2. construct with health, happiness, weight set to defined values.
+
+---Method overview---
+
+	---Private---
+	isValid()
+		This will check to see if changeAmount is valid.
+	
+	---Public---
+	modifyCharacteristic()
+		Accepts an int changeAmount and String characteristic. calls setCharacteristic
+	getCharacteristic() (3 methods)
+		Returns value of characteristic
+	setCharacteristic() (3 methods)
+		Sets the characteristic
+	makeSadNoise()
+		Prints a sad face
+
+	---Abstract---
+	makeHappyNoise()
+		Will print out the happy noise defined by subclass
+
+---Method pseudocode---
+
+	modifyCharacteristic():
+		Set the characteristic string to all lowercase
+		Check to see if the string is a valid characteristic of the character.
+			If not, throw an exception.
+		Calls setCharacteristic() to modify characteristic
+
+	getCharacteristic():
+		Returns characteristic
+
+	isValid():
+		Add the characteristic and changeAmount and see if it is in bounds
+			If impossible, it will throw an exception
+
+	setCharacteristic():
+		Sets the characteristic if the value is valid
+
+	makeSadNoise():
+		Will print out a sad face because the character is sad
+
+	makeHappyNoise():
+		Will print out animal's happy noise.

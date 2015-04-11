@@ -1,0 +1,45 @@
+Class GameCharacter
+
+---Initialization variables for game character---
+
+	---Private---
+	health = 50
+	happiness = 50
+	weight = 50
+
+	---Public---
+	none
+
+---Method overview---
+
+	---Private---
+	setCharacteristic() (3 methods)
+		Takes int changeAmount and adds to specified characteristic.
+	isValid()
+		This will check to see if changeAmount is valid.
+
+	---Public---
+	modifyCharacteristic()
+		Accepts an int changeAmount and String characteristic. calls setCharacteristic
+	getCharacteristic() (3 methods)
+		Returns value of characteristic
+	
+---Method pseudocode---
+
+	modifyCharacteristic():
+		Set the characteristic string to all lowercase
+		Check to see if the string is a valid characteristic of the character.
+			If not, throw an exception.
+		Checks isValid()
+			If not, isValid() will throw an excaption
+		Calls setCharacteristic() to modify characteristic
+
+	getCharacteristic():
+		Returns characteristic
+
+	isValid():
+		Add the characteristic and changeAmount and see if it is in bounds
+			If impossible, it will throw an exception
+
+	setCharacteristic():
+		Modify the characteristic by changeAmount

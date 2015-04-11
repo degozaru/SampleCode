@@ -1,0 +1,108 @@
+package data_structures;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class OrderedArrayPriorityQueue<E> implements PriorityQueue<E> {
+
+  // Variable Declarations
+  private int size, maxSize;
+  private E[] vectorArray = (E[])new Object[DEFAULT_MAX_CAPACITY];
+
+  //Constructor
+  public OrderedArrayPriorityQueue() {
+    size = 0;
+    maxSize = DEFAULT_MAX_CAPACITY;
+  } //End constructor
+
+  //Inserts a new object into the priority queue.
+  //Returns False if the queue is full.
+  public boolean insert(E object) {
+    if(isFull()) return false;
+    int insertLoc = find(object, 0, size-1);
+    for(int i=size; i>insertLoc; i--) vectorArray[i] = vectorArray[i-1];
+    vectorArray[insertLoc] = object;
+    size++;
+    return true;
+  } //End insert()
+
+  //Removes the top priority object that has been
+  //in the queue the longest.
+  //returns null if empty
+  public E remove() {
+    if(isEmpty()) return null;
+    E temp = vectorArray[0];
+    size--;
+    for(int i=0; i<size; i++) vectorArray[i] = vectorArray[i+1];
+    return vectorArray[0];
+  } //End remove()
+
+  //Returns but does not remove the object
+  //with highest priority that has been in
+  //the queue the longest. Returns null if empty
+  public E peek() {
+    if(isEmpty()) return null;
+    return vectorArray[0];
+  } //End peek()
+
+  public boolean contains(E obj) {
+    for(int i=0; i<size; i++)
+      if(obj.equals(vectorArray[i])) return true;
+    return false;
+  } //End contains()
+
+  public int size() {
+    return size;
+  } //End size()
+
+  public void clear() {
+    size = 0;
+    vectorArray = (E[])new Object[DEFAULT_MAX_CAPACITY];
+  } //End clear()
+
+  public boolean isEmpty() {
+    return size==0;
+  } //End isEmpty()
+
+  public boolean isFull() {
+    return size==maxSize;
+  } //End isFull()
+  
+  public Iterator<E> iterator() {
+    return new IteratorHelper();
+  }
+
+  //This will return the index of where an element should be inserted
+  private int find(E obj, int low, int hi) {
+    //Termination condition: Found the insertion point.
+    if(hi<low) return low;
+
+    //Compare the middle of the array to the sought object
+    int mid = (low+hi)/2;
+    int comp = ((Comparable<E>)obj).compareTo(vectorArray[mid]);
+
+    //If not found, recursively call the function with a refined search area.
+    return (comp<0)?find(obj, low, mid-1) : find(obj, mid+1, hi);
+  } //End find()
+
+  class IteratorHelper implements Iterator<E> {
+    int iterIndex;
+
+    public IteratorHelper() {
+      iterIndex = 0;
+    }
+
+    public boolean hasNext() {
+      return iterIndex<size;
+    }
+
+    public E next() {
+      if(!hasNext()) throw new NoSuchElementException();
+      return vectorArray[iterIndex++];
+    }
+
+    public void remove() {
+      throw new UnsupportedOperationException();
+    }
+  }
+} //End OrderedArrayPriorityQueue

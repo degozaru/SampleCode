@@ -1,0 +1,18 @@
+---Classes---
+
+CatCharacter extends GameCharacter
+DogCharacter extends GameCharacter
+AlienCharacter extends GameCharacter
+
+---Methods---
+
+All the above classes, in addition to extending the methods of GameCharacter, will include:
+
+-Default constructor (will set Health, Happiness, and Weight to 100 by default)
+-Special constructor that accepts custom values for Health, Happiness, Weight.
+	This constructor will call the default constructor if the user inputs an invalid amount for any one of the values.
+
+-A makeHappyNoise that will print a string depending on class:
+	Cats will print "Meow"
+	Dogs will print "Woof"
+	Aliens will print "Bzzrp"

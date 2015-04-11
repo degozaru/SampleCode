@@ -1,0 +1,62 @@
+#Commanding the command line: uploading your assignment
+
+You're all done with your assignment, and you want to upload it to your masc account, how would you do it with command line? In this guide, I will help guide you through the process of uploading your assignment to your rohan account. Note that this is a BASH guide and should only used for BASH terminals (Windows users are usually not using bash. PUTTY uses bash.).
+
+##What is an SSH
+
+An SSH is a secure shell. To put it simply, it's accessing a computer using your own computer. When we "ssh into something," we are using a computer to access a server that hosts files for you. SSH'ing into computers proves useful because it allows you to have literally nothing connected to a computer except the network utilities and it's power supply. For more useful purposes, we can SSH to host websites (The website used to host these notes is running off the jason.sdsu.edu ssh server).
+
+##Why terminal?
+
+Why should we use terminal? What is it's benefits? What can we possibly gain from using this text only box that looks like only super leet hackers or grampa programmers use? The benefits are:
+
+* Sometimes in a professional enviroment, you might be tasked with working with a computer without an enviroment, and will only provide a command line.
+* __KEYBOARD ONLY__. Although this might seem as a downside, reaching for a mouse or fumbling with a touchpad becomes a hassle at times. Learning to use hotkeys and keyboard commands will greatly increase productivity.
+* Many server side jobs require knowledge of text-only interfacing.
+* That resume padder, yeah? yeah?
+* SSH'ing into places. When you're working with a computer you can't touch, you can either control it remotely, or SSH into it.
+* Bragging rights. Aww yeah now you look like a leet hacker
+
+##Prepping for launch: logging in and making directories.
+
+Before we upload our file, let's get into our rohan account. For getting into your rohan, we can use the command `ssh mascXXXX@rohan.sdsu.edu`. After that, it'll prompt you for a password. Let's give it our password we recieved in class. 
+
+###Home sweet home
+
+Once you've hacked the gibson (you++ if you get the joke!), you'll be inside your home directory. This is called `~` by shorthand. It's your base directory, or where you start when you log into this magical cyberspace.
+
+###Let's make a folder!
+
+Our professor wants us to upload to a certain directory so her robot servants will grade us. Lets say, for example, we need to upload our assignment to a folder named `assignment1` __NOTE: Case matters__. Let's do that right now. we can make a "folder" (in a more professional enviroment, people usually call them directories.) by punching in `mkdir assignment1`. 
+
+###And check it
+
+Let's do a quick `ls` to make sure it's there. If you see a directory named Assignment1, you've done it! Punch in `exit` and return to meatspace to give yourself a pat on the back and maybe pop open a nice beer in celebration.
+
+##Sending your assignment
+
+The moment everyone's been waiting for! Sending off your assignment to be inspected by the robots is very easy. This will guide you through sending in a BASH command line.
+
+###Hide and seek
+
+Lets fire up your terminal. After launching your terminal, you should be in your home directory. This is how my terminal looks like:
+
+>victoria@Thinkpad:~$
+
+This shows your user and what computer you're at, as well as the directory, which should be your home directory (The ~ means you're home, remember?). Now, you've gotta find your assignment using the `cd` and `ls` commands. I've found mines!
+
+>`cd documents/class_notes/cs108/assignment1`
+
+##Send her off to school
+
+After you've located your document, you're ready to send it off. using the `scp` command will upload the document to the desired host, user, and directory. For me, I'm going to upload assignment1.java to the folder on my masc user at the server rohan.sdsu.edu inside the folder ~/Assignment1 (The Assignment1 directory inside my home folder). Lets see what I did:
+
+>`scp assignment1.java mascXXXX@rohan.sdsu.edu:~/assignment1`
+
+In the above code, I gave my bash terminal the `scp` command, which takes two (or more if you want to multi upload files) parameters: file(s), and location. The file in this area was assignment1.java. The location was the user mascXXXX on the server rohan.sdsu.edu, in the directory ~/assignment1.
+
+After that's done, make sure its in there by SSH'ing into your account and verifying it's existance.
+
+##You're done!
+
+See you, space cowboy!

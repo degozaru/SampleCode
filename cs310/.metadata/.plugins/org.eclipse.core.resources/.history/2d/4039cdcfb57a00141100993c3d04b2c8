@@ -1,0 +1,257 @@
+package data_structures;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.ConcurrentModificationException;
+
+public class BinarySearchTree<K,V> implements DictionaryADT<K,V> {
+  /**Node Wrapper Class********************************/
+  /**                                                **/
+  class Node<K,V> implements Comparable<Node<K,V>> {
+    K key;
+    V value;
+    Node<K,V> parent;
+    Node<K,V> left;
+    Node<K,V> right;
+    public Node(K k, V v) {
+      key = k;
+      value = v;
+      parent = left = right = null;
+    }
+    public int compareTo(Node<K,V> node) {
+      return ((Comparable<K>)key).compareTo((K)node.key);
+    }
+  }
+  /**                                                **/
+  /****************************************************/
+
+  /**Variables***************************/
+  /*                                    */
+  private int size;
+  private long modCtr;
+  private Node<K,V> root;
+  /*                                    */
+  /**************************************/
+
+  //Constructor
+  public BinarySearchTree() {
+    size = 0;
+    modCtr = 0;
+    root = null;
+  } //End constructor
+
+  //Returns true if the dictionary has an object
+  //with specified key
+  public boolean contains(K key) {
+    Node<K,V> find = new Node<K,V>(key, null);
+    Node<K,V> current = root;
+    int comp;
+    while(current!=null) {
+      comp = ((Comparable<Node<K,V>>)find).compareTo(current);
+      if(comp==0) return true;
+      current = (comp>0)?current.right : current.left;
+    }
+    return false;
+  } //End contains()
+
+  //Adds the given key/value pair.
+  //Returns false if dictionary is full.
+  public boolean add(K key, V value) {
+    if(isFull()) return false;
+    if(isEmpty()) {
+      root = new Node<K,V>(key, value);
+      size++;
+      modCtr++;
+    }
+    Node<K,V> toAdd = new Node<K,V>(key, value);
+    Node<K,V> current = null;
+    Node<K,V> next = root;
+    int comp = 666;
+    while(next!= null) {
+      comp = ((Comparable<Node<K,V>>)toAdd).compareTo(next);
+      if(comp==0) return false;
+      current = next;
+      next = (comp>0)?next.right : next.left;
+    }
+    toAdd.parent = current;
+    if(comp>0) current.right = toAdd;
+    else current.left = toAdd;
+    size++;
+    modCtr++;
+    return true;
+  } //End add()
+
+  //Will delete the key/value pair in the dictionary.
+  //returns false if failed.
+  public boolean delete(K key) {
+    Node<K,V> toDel = new Node<K,V>(key, null);
+    Node<K,V> previous = null;
+    Node<K,V> current = root;
+    int comp = -1;
+    int prevComp = -1;
+    while(current!=null) {
+      prevComp = comp;
+      comp = ((Comparable<Node<K,V>>)toDel).compareTo(current);
+      if(comp==0) break;
+      previous = current;
+      current = (comp>0)?current.right : current.left;
+    }
+    if(comp!=0) return false;
+    //Case 1: two children
+    if(current.left!=null && current.right!=null) {
+      Node<K,V> nextNode = findNext(current);
+      delete(nextNode.key);
+      current.key = nextNode.key;
+      current.value = nextNode.value;
+    }
+    //Case 2: no children
+    else if(current.left==null && current.right==null) {
+      if(size==1) root = null;
+      else {
+        if(prevComp>0)previous.right=null;
+        else previous.left=null;
+      } 
+    }
+    //Case 3: one child
+    else {
+      Node<K,V> nextNode = (current.right!=null)?current.right : current.left;
+      if(prevComp>0)
+        previous.right= nextNode;
+      else previous.left= nextNode;
+      nextNode.parent = previous;
+    }
+    size--;
+    modCtr++;
+    return true;
+  } //End delete
+
+  //Auxiliary function for finding the prodecessor or predecessor
+  //of a desiginated node. This function will attempt to keep the tree
+  //healthy (in good balance) by balancing the tree based on the mod counter.
+  private Node<K,V> findNext(Node<K,V> top) {
+    Node<K,V> next;
+    Node<K,V> current = top;
+    if(modCtr%2==0) { 
+      next = top.right;
+      while(next!=null) {
+        current = next;
+        next = next.left;
+      } 
+    }
+    else {
+      next = top.left;
+      while(next!=null) {
+        current = next;
+        next = next.right;
+      }
+    }
+    return current;
+  } //End findNext()
+
+  //Gets the value of the specified key
+  public V getValue(K key) {
+    Node<K,V> find = new Node<K,V>(key, null);
+    Node<K,V> current = root;
+    int comp;
+    while(current!=null) {
+      comp = ((Comparable<Node<K,V>>)find).compareTo(current);
+      if(comp==0) return current.value;
+      current = (comp>0)?current.right : current.left;
+    }
+    return null;
+  } //End getValue()
+
+  //Returns the key associated with the parameter value.
+  //Returns null if value not found in the dictionary.
+  //Returns the first value found;
+  public K getKey(V value) {
+    return findKey(value, root);
+  } //End getKey()
+  //This is a recurisve function to assist in finding the
+  //key.
+  private K findKey(V value, Node<K,V> current) {
+    if(current==null) return null;
+    if(findKey(value, current.left)!=null)
+      return findKey(value, current.left);
+    if(findKey(value, current.right)!=null)
+      return findKey(value, current.right);
+    int comp = ((Comparable<V>)current.value).compareTo(value);
+    return (comp==0)?(K)current.key : null;
+  } //End findKey()
+
+  //returns the current size
+  public int size() {
+    return size;
+  } //End size()
+
+  //Returns true if the dictionary is full
+  public boolean isFull() {
+    return false;
+  } //End isFull()
+
+  //returns true if the dictionary is empty
+  public boolean isEmpty() {
+    return size==0;
+  } //End isEmpty()
+
+  //Clears the tree.
+  public void clear() {
+    root = null;
+    size = 0;
+    modCtr = 0;
+  } //End clear()
+
+  /**Iterator functions********************/
+  /**                                    **/
+  public Iterator<K> keys() {
+    return new KeyIter();
+  }
+  public Iterator<V> values() {
+    return new ValIter();
+  }
+  abstract class MainIterator<E> implements Iterator<E> {
+    protected Node<K,V> [] nodes;
+    protected int index, j;
+    protected long modChk;
+    public MainIterator() {
+      nodes = new Node[size];
+      index = 0;
+      j = 0;
+      modChk = modCtr;
+      toArray(root);
+    }
+    private void toArray(Node<K,V> current) {
+      if(current==null) return;
+      toArray(current.left);
+      nodes[j++] = current;
+      toArray(current.right);
+    }
+    public boolean hasNext() {
+      if(modChk!=modCtr)
+        throw new ConcurrentModificationException();
+      return index<size;
+    }
+    public abstract E next();
+    public void remove() {
+      throw new UnsupportedOperationException();
+    }
+  }
+  class KeyIter<K> extends MainIterator<K> {
+    public KeyIter() {
+      super();
+    }
+    public K next () {
+      return (K)nodes[index++].key;
+    }
+  } 
+  class ValIter<V> extends MainIterator<V> {
+    public ValIter() {
+      super();
+    }
+    public V next() {
+      return (V)nodes[index++].value;
+    }
+  }
+  /**                                    **/
+  /****************************************/
+} //End BinarySearchTree

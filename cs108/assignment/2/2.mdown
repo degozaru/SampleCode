@@ -1,0 +1,63 @@
+#GameCharacter.java code
+
+```Java
+public class GameCharacter {
+	
+	//Variable declarations that initialize the variables.
+	private int health = 100, weight = 50, happiness = 75;
+	
+	//This will check and set the characteristic
+	public void modifyCharacteristic(int changeAmount, String characteristic) {
+		//This will check and modify the characteristics, if valid.
+		switch(characteristic.toLowerCase()) {
+		case "health": 
+			isValid(changeAmount, health);
+			setHealth(changeAmount);
+			break;
+		case "weight": 
+			isValid(changeAmount, weight);
+			setWeight(changeAmount);
+			break;
+		case "happiness":
+			isValid(changeAmount, happiness);
+			setWeight(changeAmount);
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid char.");
+		}
+	} //End modifyCharacteristic()
+	
+	//These are the get functions
+	public int getHealth() {
+		return health;
+	} //End getHealth()
+	public int getWeight() {
+		return weight;
+	} //End getWeight()
+	public int getHappiness() {
+		return happiness;
+	} //End getHappiness()
+	
+	//This are the set functions
+	private void setHealth(int changeAmount) {
+		this.health += changeAmount;
+	} //End setHealth()
+	private void setWeight(int changeAmount) {
+		this.weight += changeAmount;
+	} //End setWeight()
+	private void setHappiness(int changeAmount) {
+		this.happiness += changeAmount;
+	} //End setHappiness()
+	
+	//This will throw an exception if illegal change happens
+	private boolean isValid(int changeAmount, int characteristic) {
+		if (0 <= (characteristic + changeAmount) 
+		&& (characteristic + changeAmount) <= 100) {
+			return true;
+		} else {
+			throw new IllegalArgumentException("Exceeds bounds.");
+		}	
+	} //End isValid()
+
+} //End class GameCharacter
+```

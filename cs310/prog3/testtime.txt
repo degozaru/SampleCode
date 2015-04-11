@@ -1,0 +1,138 @@
+Testing with randomly ordered data...
+
+***************Testing the OrderedArrayDictionary...
+Now performing 100000 searches.
+TIME: 80
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 55
+
+***************Testing the Hashtable...
+Now performing 100000 searches.
+TIME: 66
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 186
+
+***************Testing the Binary Search Tree...
+Now performing 100000 searches.
+TIME: 73
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 153
+
+***************Testing the BalancedTree...
+Now performing 100000 searches.
+TIME: 95
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 174
+
+
+Now testing with ORDERED data...
+
+***************Testing the OrderedArrayDictionary...
+Now performing 100000 searches.
+TIME: 93
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 20
+
+***************Testing the Hashtable...
+Now performing 100000 searches.
+TIME: 43
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 164
+
+***************Testing the Binary Search Tree...
+Now performing 10000 searches.
+TIME: 514
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 59
+
+***************Testing the BalancedTree...
+Now performing 100000 searches.
+TIME: 55
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 84
+
+Testing with randomly ordered data...
+
+***************Testing the OrderedArrayDictionary...
+Now performing 100000 searches.
+TIME: 79
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 58
+
+***************Testing the Hashtable...
+Now performing 100000 searches.
+TIME: 63
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 181
+
+***************Testing the Binary Search Tree...
+Now performing 100000 searches.
+TIME: 74
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 145
+
+***************Testing the BalancedTree...
+Now performing 100000 searches.
+TIME: 78
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 182
+
+
+Now testing with ORDERED data...
+
+***************Testing the OrderedArrayDictionary...
+Now performing 100000 searches.
+TIME: 88
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 22
+
+***************Testing the Hashtable...
+Now performing 100000 searches.
+TIME: 44
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 161
+
+***************Testing the Binary Search Tree...
+Now performing 10000 searches.
+TIME: 516
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 86
+
+***************Testing the BalancedTree...
+Now performing 100000 searches.
+TIME: 54
+
+Reverse lookups...
+Now performing 1000 searches.
+TIME: 77
+

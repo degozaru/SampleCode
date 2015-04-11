@@ -1,0 +1,7 @@
+public class GameCharacter {
+	
+	//Variable declarations that initialize the variables.
+	private int health = 100, weight = 50, happiness = 75;
+	
+	//The getter function. Returns the value of the requested variable.
+}

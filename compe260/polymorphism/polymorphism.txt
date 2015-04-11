@@ -1,0 +1,65 @@
+=========================
+Employee List
+=========================
+1. Vincent - O
+	 Salray: $15000
+---------------
+2. Chirstina - C
+	 Salray: $10000
+	 Specialty: Italian
+---------------
+3. Braxel - C
+	 Salray: $10000
+	 Specialty: French
+---------------
+4. Kaitlyn - W
+	 Salray: $3000
+	 Years Worked: 3
+---------------
+5. Daniel - W
+	 Salray: $3000
+	 Years Worked: 2
+---------------
+6. Kathryn - W
+	 Salray: $3000
+	 Years Worked: 4
+---------------
+=========================
+
+=========================
+End of Month report
+=========================
+Profits: $6000
+---------------
+1. Vincent - O
+	 Salray: $15000
+	 Profit Share: %60
+	 Net Pay: $18600
+---------------
+2. Chirstina - C
+	 Salray: $10000
+	 Profit Share: %20
+	 Net Pay: $11200
+---------------
+3. Braxel - C
+	 Salray: $10000
+	 Profit Share: %20
+	 Net Pay: $11200
+---------------
+4. Kaitlyn - W
+	 Salray: $3000
+	 Tips earned: $1000
+	 Net Pay: $4000
+---------------
+5. Daniel - W
+	 Salray: $3000
+	 Tips earned: $1500
+	 Net Pay: $4500
+---------------
+6. Kathryn - W
+	 Salray: $3000
+	 Tips earned: $1700
+	 Net Pay: $4700
+---------------
+=========================
+

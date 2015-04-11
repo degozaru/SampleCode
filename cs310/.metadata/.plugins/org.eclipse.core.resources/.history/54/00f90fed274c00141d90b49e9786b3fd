@@ -1,0 +1,114 @@
+package data_structures;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class UnorderedArrayPriorityQueue<E> implements PriorityQueue<E> {
+
+  // Variable Declarations
+  private int size, maxSize;
+  private E[] vectorArray = (E[])new Object[DEFAULT_MAX_CAPACITY];
+
+  //Constructor
+  public UnorderedArrayPriorityQueue() {
+    size = 0;
+    maxSize = DEFAULT_MAX_CAPACITY;
+  } //End constructor
+
+  //Insert will insert an object at the end of the array.
+  public boolean insert(E object) {
+    if(isFull()) return false;
+    vectorArray[size] = object;
+    size++;
+    return true;
+  } //End insert()
+
+  //Will remove the highest priority object.
+  //Ties are broken by which was inserted first.
+  public E remove() {
+    if(isEmpty()) return null;
+    int lastIndex = 0;
+    
+    //Finding what to remove: compare priority.
+    int comp;
+    for(int i=1; i<size; i++) {
+      comp = ((Comparable<E>)vectorArray[lastIndex]).compareTo(vectorArray[i]);
+      if(comp>0) lastIndex = i;
+    }
+
+    //Cleanup and retrun: Shift array and return object.
+    E temp = vectorArray[lastIndex];
+    size--;
+    for(;lastIndex<size;lastIndex++)
+      vectorArray[lastIndex] = vectorArray[lastIndex+1];
+    return temp;
+  } //End remove()
+
+  //Returns object of highest priority,
+  //does NOT remove it.
+  public E peek() {
+    if(isEmpty()) return null;
+    int lastIndex = 0;
+
+    for(int i=1; i<size; i++) {
+      int comp = ((Comparable<E>)vectorArray[lastIndex]).compareTo(vectorArray[i]);
+      if(comp==1) lastIndex = i;
+    }
+
+    return vectorArray[lastIndex];
+  } //End peek()
+
+  //Will check the queue to see if
+  //the specified object is a component.
+  public boolean contains(E obj) {
+    for(int i=0; i<size; i++) 
+      if(obj.equals(vectorArray[i])) return true;
+    return false;
+  } //End contains()
+
+  //Returns the current size of the queue.
+  public int size() {
+    return size;
+  } //End size()
+
+  //Clears the queue.
+  public void clear() {
+    vectorArray = (E[])new Object[DEFAULT_MAX_CAPACITY];
+    size = 0;
+  } //End clear()
+
+  //Returns true if queue is empty.
+  public boolean isEmpty() {
+    return size==0;
+  } //End isEmpty()
+
+  //Returns true if the queue is full.
+  public boolean isFull() {
+    return size == maxSize;
+  } //End isFull()
+
+  public Iterator<E> iterator() {
+    return new IteratorHelper();
+  }
+
+  class IteratorHelper implements Iterator<E> {
+    int iterIndex;
+
+    public IteratorHelper() {
+      iterIndex = 0;
+    }
+
+    public boolean hasNext() {
+      return iterIndex<size;
+    }
+
+    public E next() {
+      if(!hasNext()) throw new NoSuchElementException();
+      return vectorArray[iterIndex++];
+    }
+
+    public void remove() {
+      throw new UnsupportedOperationException();
+    }
+  }
+} //End Class UnorderedArrayPriorityQueue()

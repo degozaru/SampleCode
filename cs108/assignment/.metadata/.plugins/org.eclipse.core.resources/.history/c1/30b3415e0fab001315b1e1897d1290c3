@@ -1,0 +1,66 @@
+abstract public class GameCharacter {
+	
+	//Variable declarations that initialize the variables.
+	private int health = 100, weight = 50, happiness = 75;
+	
+	//This will check and set the characteristic
+	public void modifyCharacteristic(int changeAmount, String characteristic) {
+		//This will check and modify the characteristics, if valid.
+		switch(characteristic.toLowerCase()) {
+		case "health": 
+			setHealth(changeAmount + health);
+			break;
+		case "weight": 
+			setWeight(changeAmount + weight);
+			break;
+		case "happiness":
+			setHappiness(changeAmount + happiness);
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid char.");
+		}
+	} //End modifyCharacteristic()
+	
+	//These are the get functions
+	public int getHealth() {
+		return health;
+	} //End getHealth()
+	public int getWeight() {
+		return weight;
+	} //End getWeight()
+	public int getHappiness() {
+		return happiness;
+	} //End getHappiness()
+	
+	//This are the set functions
+	private void setHealth(int amount) {
+		isValid(amount);
+		this.health = amount;
+	} //End setHealth()
+	private void setWeight(int amount) {
+		isValid(amount);
+		this.weight = amount;
+	} //End setWeight()
+	private void setHappiness(int amount) {
+		isValid(amount);
+		this.happiness = amount;
+	} //End setHappiness()
+	
+	//This will throw an exception if illegal change happens
+	private boolean isValid(int amount) {
+		if (0 <= (amount) && (amount) <= 100) {
+			return true;
+		} else {
+			throw new IllegalArgumentException("Exceeds bounds.");
+		}	
+	} //End isValid()
+	
+	//This will make a sad noise.
+	public void makeSadNoise() {
+		System.out.println(":(");
+	} //End makeSadNoise()
+	
+	//A signature for makeHappyNoise()
+	abstract public void makeHappyNoise();
+	
+} //End class GameCharacter

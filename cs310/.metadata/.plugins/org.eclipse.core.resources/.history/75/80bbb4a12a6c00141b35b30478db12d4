@@ -1,0 +1,76 @@
+public class ThreadedSorter{
+  public static <E> E[] shellSort(E[] array, int threads) {
+    //This will calculate the chunk to be used for each array.
+    //if the number of threads exceeds half the array length (chunk=2),
+    //or exceeds the max number of threads, we will use a different number of threads.
+    E[] arr = array;
+    if(threads>array.length) threads = array.length/2;
+    if(threads>256) threads=256;
+    else if(threads<=0) threads=1;
+    WorkerThread[] threadArray = new WorkerThread[threads];
+    int arrayChunk = array.length/threads;
+
+    //This part will start the threads
+    int first = 0, last = arrayChunk, j = 0;
+    for(int i=0; i<threads; i++) {
+      if(i==threads-1) last = array.length-1;
+      threadArray[i] = new WorkerThread<E>(arr, first, last);
+      threadArray[i].start();
+      first = last+1;
+      last += arrayChunk;
+    }
+
+    //Waiting for the threads to join
+    try{
+      for(int i=0; i<threads; i++) threadArray[i].join();
+    }
+    catch(Exception e) {
+      System.out.println("ERROR, " + 2);
+    }
+
+    sort(array, 0, array.length-1);
+    return array;
+  } //End shellSort()
+
+  static class WorkerThread<T> extends Thread{
+    T[] tmp;
+    int start, end;
+    public WorkerThread(T[] arr, int s, int e) {
+     tmp = arr;
+     start = s;
+     end = e;
+    } //End constructor
+
+    public void run() {
+      sort(tmp, start, end);
+    } //End run()
+  } //End WorkerThread
+
+  //This will sort the array via shell sort.
+  public static <E> void sort(E[] array, int start, int last) {
+    int toSort, current;
+    int gap = 1;
+    int length = last-start+1;
+    E temp;
+    
+    //Calculate the gaps using the Knuth's sequence
+    while(gap<=length/3) gap = gap++*3;
+    
+    //Sort the array
+    while(gap>0) {
+      //Sort with the given gap
+      for(toSort=start+gap; toSort<last+1; toSort++) {
+        temp = array[toSort];
+        current = toSort;
+        //Shift the array over until we find the place to insert the temp
+        while(current>start+gap-1 && ((Comparable<E>)temp).compareTo(array[current-gap])<0) {
+          array[current] = array[current-gap];
+          current -= gap;
+        }
+        temp = array[current];
+      }
+      //Reduce the gap and resort using the new gap.
+      gap = --gap/3;
+    } 
+  } //End sort()
+}//End ThreadedSorter

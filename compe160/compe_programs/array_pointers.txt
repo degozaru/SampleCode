@@ -1,0 +1,45 @@
+Lab 7: Array and pointer practice
+
+main():
+  declare and initialize redID array, using my id: 815909699
+  print the whole array (using printarray()
+  print the sum (using sum())
+  sort the array (using sort())
+  print the middle of the array (element 4)
+  prints out a float of sum divided by array size
+
+=====
+
+Functions:
+  int sum(int array[], int asize);
+  int swap(int *pA, int *pB);
+  int sort_1pass(int array[], int asize);
+  void sort(int array[], int asize);
+  void printarray(int array[], int asize);
+
+sum():
+  Initialize a sum variable with value 0.
+  Create a loop that will run until it reaches the end of the array.
+    Add each element to the sum
+  return the sum.
+
+swap():
+  Initialize a temp variable
+  Take the address of the first variable and set temp to it
+  Take the address of second variable and set the first to it
+  Set the second to the temp variable.
+  return 1 if sucessful. Return 0 if not.
+
+sort_1pass():
+  Loop until the end of the array.
+    check if the variable of the current element is more than the next.
+      swap the variable locations they are.
+  return 1 if variable was swapped, 0 if not.
+
+sort():
+  while sort_1pass() is true, run sort_1pass().
+  print the array after every sort
+
+printarray():
+  print each element in the array.
+

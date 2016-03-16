@@ -1,0 +1,90 @@
+\documentclass{report}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\begin{document}
+\title{Binomial Distributions of Coin Flipping}
+\author{Vincent Chan
+		  \\RedID 815909699
+		  \\Electrical Engineering 300}
+\date{March 14, 2016}
+\maketitle
+\lstset{language=MatLab}
+
+When a coin is flipped, there is an equal chance for a coin to land on heads or tails. For this expriment, I will utulize MatLab to simulate four sets of 10,000 coin flips and analyze the probability distribution function of these flips organized in two different scenarios:
+
+\begin{enumerate}
+\item{Treating the four sets as one trial, the number of heads flipped in 10,000 trials.}
+\item{Using all 40,000 flips, the times a side is flipped consecutively.}
+\end{enumerate}
+
+Before I continue, I will note that the matlab source code will be included alongside this report. Please refer to there for additional information on my methodology.
+
+Before we continue our coinflips, however, we should first obtain our binomial distribution formulas, or PDFs, and the predicted values. We will begin with the easier of the two: The number of heads flipped in a four flip trial.
+
+We will first look at the set of all values that can occur. This is the discrete variable $X = \{0, 1, 2, 3, 4\}$. We will then find the probability of each event $P(h)$ happening by diving the number of possible occurances of that event by the total number of events $P(X)$. We can find $P(h)$ of any of the events using $4\choose h$. As for $P(X)$, we can find that using $2^n$, where $n$ is the number of coins flipped, four. 
+
+Upon doing our calculations, we calculated the following probabilities of each event, and the expected values for a 10,000 coin flip experiment:
+
+\begin{itemize}
+\item{0 heads: $\frac{1}{16}$, $625$ expected}
+\item{1 heads: $\frac{4}{16}$, $2500$ expected}
+\item{2 heads: $\frac{6}{16}$, $3750$ expected}
+\item{3 heads: $\frac{4}{16}$, $2500$ expected}
+\item{4 heads: $\frac{1}{16}$, $625$ expected}
+\end{itemize}
+
+Now, we will tackle the harder scenario: the times a side is flipped consecutively. If we were to create an event space for this scenario, we would end up with a discrete variable $X = \{1, 2, 3, \dots, 40000\}$. Because of it's length, we will not be able to calculate them all. However, we know that there is only one possible way to flip a coin consecutively. So, we know our total number of any event $P(h)$ happening is 1. We then have to find the total number of events $P(X)$ that can happen. Since the event space grows as we flip more coins (meaning that each consecutive flip has a larger $P(X)$), we need to find a formula that will calculate $P(X)$ for a given number of flips, which we can define as $2^n$, where n is how many coins were flipped.
+
+Calculating the probabilities using the same method as above, we find, for the first five consecutive flips, shown below. We will not include an expected value, because the total sample will vary depending on frequencies of consecutive flips.
+
+\begin{itemize}
+\item{1 consecutive: $\frac{1}{2^1}$}
+\item{2 consecutive: $\frac{1}{2^2}$}
+\item{3 consecutive: $\frac{1}{2^3}$}
+\item{4 consecutive: $\frac{1}{2^4}$}
+\item{5 consecutive: $\frac{1}{2^5}$}
+\end{itemize}
+
+
+\newpage
+\begin{figure}
+    \centering
+    \includegraphics[scale=.5]{untitled.jpg}
+    \caption{Probability distribution of the two scenarios}
+\end{figure} 
+
+Now that we have predicted our PDFs, we will test out our hypothesis. To generate the coin flips, we will use the following code to quickly preform our required number of flips. These flips will be divided into 4 columns for easier processing.
+
+\begin{lstlisting}
+result = round(rand(10000,4));
+\end{lstlisting}
+
+Included in \textit{figure 1} is a histogram showing the events and occurance count of the events. To compliment these exprimental results, the estimated results have been graphed alongside our results in yellow. As we can see, the estimated results closely resemble our experimental results.
+
+
+\end{document}

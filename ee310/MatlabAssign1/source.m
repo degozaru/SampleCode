@@ -1,11 +1,11 @@
 %%%%%%%%%%%%Circuit Definition%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                    %%
 %Frequency
-w = 130*(10.^6);
+w = (2*pi)*130*(10.^6);
 
 %Power Sources
-V1rms = 1/sqrt(2);
-V2rms = 1/sqrt(2);
+V1rms = 1;
+V2rms = 1;
 Vr = 0;
 
 %Antenna Resistance
@@ -57,25 +57,27 @@ A = [(Z1+Z2+Z3),-Z3,0,0,0,0,0;
       0,0,0,0,0,-Z13,(Z13+Z14)];
 V = [V1rms + V2rms;0;0;0;0;0;-Vr];
 
-I = A\V; %AHHHH SO COOL WOW
+I = A\V;
 %%                                                                    %%
 %%%%%%%%%%%%Calculate Currents%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%Find VRMS needed for 80W%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                    %%
-power = real((I(7).^2) * Z14);
+power = .5 * (abs(I(7)).^2) * Z14;
 disp(strcat('Power @ 1Vpp = ', num2str(power), ' Watts'));
+disp(I(4));
 %I ain't got time to calculate power!
 while power<80
     V1rms = V1rms+1;
     V2rms = V2rms+1;
     V = [V1rms + V2rms;0;0;0;0;0;-Vr];
     I = A\V;
-    power = real((I(7).^2) * Z14);
+    power = .5 * (abs(I(7)).^2) * Z14;
 end
 %got it fam
 disp(strcat(                        ...
      num2str(power), ' Watts @ ',   ...
      ' Vrms = ', num2str(V1rms), ' V'));
+ disp(real(I(5)*Z10));
 %%                                                                    %%
 %%%%%%%%%%%%Find VRMS needed for 80W%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

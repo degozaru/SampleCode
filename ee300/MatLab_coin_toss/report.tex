@@ -27,11 +27,11 @@
 
 
 \begin{document}
-\title{Binomial Distributions of Coin Flipping}
+\title{The PDF and CDF of Coin-Flipping}
 \author{Vincent Chan
-		  \\RedID 815909699
+		 \\RedID 815909699
 		  \\Electrical Engineering 300}
-\date{March 14, 2016}
+\date{March 22, 2016}
 \maketitle
 \lstset{language=MatLab}
 
@@ -58,6 +58,7 @@ Upon doing our calculations, we calculated the following probabilities of each e
 \item{4 heads: $\frac{1}{16}$, $625$ expected}
 \end{itemize}
 
+\pagebreak
 Now, we will tackle the harder scenario: the times a side is flipped consecutively. If we were to create an event space for this scenario, we would end up with a discrete variable $X = \{1, 2, 3, \dots, 40000\}$. Because of it's length, we will not be able to calculate them all. However, we know that there is only one possible way to flip a coin consecutively. So, we know our total number of any event $P(h)$ happening is 1. We then have to find the total number of events $P(X)$ that can happen. Since the event space grows as we flip more coins (meaning that each consecutive flip has a larger $P(X)$), we need to find a formula that will calculate $P(X)$ for a given number of flips, which we can define as $2^n$, where n is how many coins were flipped.
 
 Calculating the probabilities using the same method as above, we find, for the first five consecutive flips, shown below. We will not include an expected value, because the total sample will vary depending on frequencies of consecutive flips.
@@ -74,7 +75,7 @@ Calculating the probabilities using the same method as above, we find, for the f
 \newpage
 \begin{figure}
     \centering
-    \includegraphics[scale=.5]{untitled.jpg}
+    \includegraphics[scale=.5]{PDF.jpg}
     \caption{Probability distribution of the two scenarios}
 \end{figure} 
 
@@ -86,5 +87,120 @@ result = round(rand(10000,4));
 
 Included in \textit{figure 1} is a histogram showing the events and occurance count of the events. To compliment these exprimental results, the estimated results have been graphed alongside our results in yellow. As we can see, the estimated results closely resemble our experimental results.
 
+In our next section, we will analyze the Comulative distribution function, or CDF.
+\pagebreak
 
+\newpage
+\begin{figure}
+    \centering
+    \includegraphics[scale=.5]{CDF.jpg}
+    \caption{Probability distribution of the two scenarios}
+\end{figure} 
+
+\textit{figure 2} shows us the CDF of both scenarios. We can see that these CDFs matches our hypothesized functions: the head counting trials gives us a CDF that is evident of a bell curved type function, while the consecutive flip function gives us a inverse-exponential function CDF. Notice that the consecutive flips function has not reached $P(x) = 1$. This is because that the possibilities of flipping a coin consecutively never ends. Were you to be lucky enough, you would keep flipping heads until the end of time.
+
+In conclusion, we have learned more about PDFs and CDFs by successfully analyzing the PDFs and CDFs of two coin flipping scenarios. Following these pages, the MatLab source code will be provided for recreation of this experiment.
+
+\pagebreak
+
+\begin{lstlisting}
+%Vincent Chan
+%RedID 815909699
+
+%flip those coins fam
+result = round(rand(10000,4));
+
+%Step 1: PDF and CDF of sum of heads
+rowTotal = sum(result, 2);
+numHeads = zeros(5,2);
+%This the hand calculated PDF, as explained in the report
+numHeads(1,2) = 10000 * (1/16);
+numHeads(2,2) = 10000 * (4/16);
+numHeads(3,2) = 10000 * (6/16);
+numHeads(4,2) = 10000 * (4/16);
+numHeads(5,2) = 10000 * (1/16);
+for i = 1:length(rowTotal)
+    numHeads(rowTotal(i,1) + 1) = numHeads(rowTotal(i,1) + 1) + 1;
+end
+%This is the CDF
+cdfSums = zeros(5,1);
+cdfSums(1) = numHeads(1,1)/10000;
+for i = 2:5
+    cdfSums(i) = cdfSums(i-1) + (numHeads(i,1)/10000);
+end
+
+%Step 2: Find run lengths
+runTotals = zeros(20,2);
+%This will find out the run length of the coins
+total = 1;
+lastRes = result(1);
+for i=2:40000
+    if lastRes == result(i)
+        total = total + 1;
+        if i == 40000
+            runTotals(total) = runTotals(total) +1;
+        end
+    
+    else
+        if i == 40000
+            runTotals(1) = runTotals(1) + 1;
+        end
+        runTotals(total) = runTotals(total) + 1;
+        total = 1;
+        lastRes = result(i);
+    end
+end
+%This will calculate the PDF of the estimated PDF
+totalRuns = sum(runTotals,1);
+for i = 1:20
+    runTotals(i,2) = totalRuns(1) * (1/(2.^i));
+end
+%This will calculate the CDF
+cdfRuns = zeros(5,1);
+cdfRuns(1) = 1/2;
+for i = 2:5
+    cdfRuns(i) = cdfRuns(i-1) + (1/(2.^i));
+end
+
+%Step 3: Plot the figures
+%PDF
+figure
+%Graph 1 - 4 flips, number of heads
+subplot(2,1,1);
+bar(numHeads);
+title('Number of heads in 4 coin flips');
+xlabel('Number of Heads');
+ylabel('Frequency');
+set(gca,'XTickLabel',[0,1,2,3,4]);
+legend('Experimental', 'Binominal Distribution');
+%Graph 2 - consecutive heads
+subplot(2,1,2);
+bar(runTotals);
+title('Number of consecutive flips (40k trials)');
+xlabel('Consecutive flips');
+ylabel('Frequency');
+legend('Experimental', 'Binominal Distribution');
+axis([0,10,0,11000]);
+
+%CDF
+figure
+%Graph 3 - CDF of 4 flips
+subplot(2,1,1);
+bar(cdfSums);
+title('Number of heads in 4 coin flips');
+xlabel('Number of Heads');
+ylabel('Total Probability');
+set(gca,'XTickLabel',[0,1,2,3,4]);
+    
+%Grpah 4 - CDF of consecutive flips
+subplot(2,1,2);
+bar(cdfRuns);
+title('Number of consecutive flips (40k trials)');
+xlabel('Consecutive flips');
+ylabel('Total Probability');
+
+%The future is here,
+%It's just not widely distributed yet.
+%William Gibson
+\end{lstlisting}
 \end{document}
